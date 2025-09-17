@@ -1,6 +1,5 @@
 # 9TH-SPRING-A
 
-
 ### 📌 Commit Convention
 **[태그] 제목의 형태**
 
