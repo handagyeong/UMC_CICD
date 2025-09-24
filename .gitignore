@@ -1,4 +1,7 @@
-# 프로젝트 제외 경로
-/.gradle/
-/build/
-/build/classes/java/main/
+# IDE
+.idea/
+.gradle/
+# Build outputs
+build/
+out/
+build/classes/java/main/
