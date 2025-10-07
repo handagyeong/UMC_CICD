@@ -114,4 +114,3 @@ https://velog.io/@tilsong/%EC%BD%94%EB%93%9C-Push%EB%A1%9C-%EB%B0%B0%ED%8F%AC%EA
 - 예:
     
     `textFixes: #12`
->>>>>>> second/main
