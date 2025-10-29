@@ -40,9 +40,10 @@ public class Member extends BaseEntity {
     @Column(length = 50)
     private String detailAddress;
 
+    @Builder.Default //4주차 피드백 수정-1
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(15) DEFAULT 'ACTIVE'")
-    private Status status;
+    private Status status=Status.ACTIVE; //4주차 피드백 수정-1
 
     private LocalDateTime inactiveDate;
 
