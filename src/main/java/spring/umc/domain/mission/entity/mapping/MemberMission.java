@@ -13,7 +13,7 @@ import spring.umc.global.entity.BaseEntity;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Table(name = "user_mission")
-public class UserMission extends BaseEntity {
+public class MemberMission extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userMissionId;
