@@ -9,7 +9,7 @@ import spring.umc.domain.member.entity.Member;
 import spring.umc.domain.member.enums.Gender;
 import spring.umc.domain.member.enums.Status;
 
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom {
     // 1. 쿼리 메서드 (메서드 이름으로 쿼리 생성)
 
     /**

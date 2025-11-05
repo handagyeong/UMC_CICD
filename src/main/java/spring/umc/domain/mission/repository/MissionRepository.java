@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import spring.umc.domain.mission.entity.Mission;
 import spring.umc.domain.store.entity.Store;
 
-public interface MissionRepository extends JpaRepository<Mission, Long> {
+public interface MissionRepository extends JpaRepository<Mission, Long>, MissionRepositoryCustom {
 
     // 1. 쿼리 메서드
 

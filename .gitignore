@@ -6,3 +6,7 @@ build/
 out/
 
 build/classes/java/main/
+
+# Q 클래스 팀원 간 충돌을 방지
+build/generated/
+src/main/generated/

@@ -11,7 +11,7 @@ import spring.umc.domain.member.entity.Member;
 import spring.umc.domain.review.entity.Review;
 import spring.umc.domain.store.entity.Store;
 
-public interface ReviewRepository extends JpaRepository<Review, Long> {
+public interface ReviewRepository extends JpaRepository<Review, Long>, ReviewRepositoryCustom {
 
     // 1. 쿼리 메서드
 
@@ -35,7 +35,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     /**
      * 특정 가게(storeId)의 평균 평점(score) 계산하기
-     * (JPQL 집계 함수 AVG 사용)
      */
     @Query("SELECT AVG(r.score) FROM Review r WHERE r.store.storeId = :storeId")
     Optional<Double> getAverageScoreByStoreId(@Param("storeId") Long storeId);

@@ -47,4 +47,11 @@ public class Member extends BaseEntity { // 클래스명 User -> Member
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    /**
+     * 멤버 포인트 추가 메서드
+     */
+    public void addPoint(Integer pointToAdd) {
+        this.point += pointToAdd;
+    }
 }

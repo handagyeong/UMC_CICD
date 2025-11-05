@@ -12,11 +12,11 @@ import spring.umc.global.entity.BaseEntity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@Table(name = "user_mission")
+@Table(name = "member_mission")
 public class MemberMission extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userMissionId;
+    private Long memberMissionId;
 
     @Column(name = "status", nullable = false)
     private Status status;

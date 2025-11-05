@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import spring.umc.domain.member.entity.Inquiry;
 import spring.umc.domain.member.entity.Member;
 
-public interface InquiryRepository extends JpaRepository<Inquiry, Long> {
+public interface InquiryRepository extends JpaRepository<Inquiry, Long>, InquiryRepositoryCustom {
     // 1. 쿼리 메서드
 
     // 특정 사용자의 모든 문의 (페이징)

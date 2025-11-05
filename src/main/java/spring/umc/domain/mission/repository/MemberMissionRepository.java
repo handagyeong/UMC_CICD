@@ -10,7 +10,7 @@ import spring.umc.domain.member.enums.Status;
 import spring.umc.domain.mission.entity.Mission;
 import spring.umc.domain.mission.entity.mapping.MemberMission;
 
-public interface MemberMissionRepository extends JpaRepository<MemberMission, Long> {
+public interface MemberMissionRepository extends JpaRepository<MemberMission, Long>, MemberMissionRepositoryCustom {
 
     // 1. 쿼리 메서드
 
@@ -20,7 +20,7 @@ public interface MemberMissionRepository extends JpaRepository<MemberMission, Lo
     List<MemberMission> findByMemberAndStatus(Member member, Status status);
 
     /**
-     * 특정 사용자와 특정 미션의 매핑 정보 찾기 (중복 수락 방지 등에 사용)
+     * 특정 사용자와 특정 미션의 매핑 정보 찾기
      */
     Optional<MemberMission> findByMemberAndMission(Member member, Mission mission);
 

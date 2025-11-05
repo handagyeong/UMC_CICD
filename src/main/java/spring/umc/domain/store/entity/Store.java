@@ -27,4 +27,11 @@ public class Store extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id", nullable = false)
     private Region region;
+
+    /**
+     * 가게 평점 업데이트 메서드
+     */
+    public void updateScore(Float newScore) {
+        this.score = newScore;
+    }
 }
