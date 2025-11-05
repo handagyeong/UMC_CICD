@@ -15,8 +15,9 @@ public class MissionImage extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long missionImageId;
 
-    @Column(name = "mission_image_url", nullable = false)
+    @Column(name = "mission_image_url", nullable = false, columnDefinition = "TEXT")
     private String missionImageUrl;
+
 
     @Column(name = "sequence", nullable = false)
     private Integer sequence;
