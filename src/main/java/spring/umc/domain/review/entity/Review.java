@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import spring.umc.domain.member.entity.User;
+import spring.umc.domain.member.entity.Member;
 import spring.umc.domain.store.entity.Store;
 import spring.umc.global.entity.BaseEntity;
 
@@ -25,8 +25,8 @@ public class Review extends BaseEntity {
     private Integer score;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id", nullable = false)

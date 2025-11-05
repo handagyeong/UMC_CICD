@@ -13,8 +13,8 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@Table(name = "user")
-public class User extends BaseEntity {
+@Table(name = "member") // 테이블명 "user" -> "member"
+public class Member extends BaseEntity { // 클래스명 User -> Member
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
