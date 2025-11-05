@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class Member extends BaseEntity { // 클래스명 User -> Member
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long memberId;
 
     @Column(name = "name", nullable = false)
     private String name;
