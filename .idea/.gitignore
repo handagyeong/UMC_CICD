@@ -1,3 +1,11 @@
 # 디폴트 무시된 파일
 /shelf/
 /workspace.xml
+# IDE/Editor files
+.idea/
+*.iml
+
+# Build output
+/build/
+
+# ... (다른 것들) ...

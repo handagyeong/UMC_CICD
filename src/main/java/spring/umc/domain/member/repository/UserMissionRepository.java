@@ -9,25 +9,23 @@ import spring.umc.domain.member.entity.UserMission;
 import spring.umc.domain.member.dto.MissionHistoryDto;
 
 
-//음..
 public interface UserMissionRepository extends JpaRepository<UserMission, Long> {
 
     //미션현황, 홈화면 유저별 미션 정보 가져오는 쿼리
-    @Query("SELECT new com.example.dto.MissionHistoryDto(s.name, um.updatedAt, m.condition, m.rewardPoint) " +
+
+    @Query("SELECT new spring.umc.domain.member.dto.MissionHistoryDto(s.name, um.updatedAt, m.missionCondition, m.point) " +
             "FROM UserMission um " +
             "JOIN um.mission m " +
             "JOIN m.store s " +
-            "WHERE um.user.id = :userId AND um.isFinished = :isFinished")
+            "WHERE um.member.id = :userId AND um.isFinished = :isFinished")
     Page<MissionHistoryDto> findMyMission(
-            @Param("userId") String userId,
+            @Param("userId") Long userId, // 2. String -> Long 수정!
             @Param("isFinished") boolean isFinished,
             Pageable pageable
     );
 
     //홈화면 달성미션개수 가져오는 쿼리
     @Query("SELECT COUNT(um) "+ "FROM UserMission um "+
-            "WHERE um.user.id = :userId AND um.isFinished = true")
-    long countFinishedMission(@Param("userId") String userId);
-
-
+            "WHERE um.member.id = :userId AND um.isFinished = true")
+    long countFinishedMission(@Param("userId") Long userId); // 2. String -> Long 수정!
 }

@@ -23,6 +23,9 @@ public class Review extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    @Column(columnDefinition = "FLOAT") //?
+    private Float star;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
