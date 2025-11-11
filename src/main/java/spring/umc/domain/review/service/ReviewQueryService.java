@@ -5,9 +5,12 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import spring.umc.domain.member.entity.QMember;
 import spring.umc.domain.review.entity.QReview;
 import spring.umc.domain.review.entity.Review;
 import spring.umc.domain.review.repository.ReviewRepository;
+import spring.umc.domain.store.entity.QLocation;
+import spring.umc.domain.store.entity.QStore;
 
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class ReviewQueryService {
 
         // Q클래스 정의
         QReview review = QReview.review;
+        QLocation location = QLocation.location;
 
         // BooleanBuilder 정의
         BooleanBuilder builder = new BooleanBuilder();
@@ -29,7 +33,7 @@ public class ReviewQueryService {
 
         // 동적 쿼리: 검색 조건
         if (type.equals("location")) {
-            builder.and(review.store.location.name.contains(query));
+            builder.and(location.name.contains(query));
         }
         if (type.equals("star")) {
             builder.and(review.star.goe(Float.parseFloat(query)));
@@ -41,7 +45,7 @@ public class ReviewQueryService {
             String secondQuery = query.split("&")[1];
 
             // 동적 쿼리
-            builder.and(review.store.location.name.contains(firstQuery));
+            builder.and(location.name.contains(firstQuery));
             builder.and(review.star.goe(Float.parseFloat(secondQuery)));
         }
 
@@ -50,6 +54,47 @@ public class ReviewQueryService {
 
         // 리턴
         return reviewList;
+    }
+    public List<Review> mysearchReview(String storeName, Integer star) {
+
+        // Q클래스 정의
+        QReview review = QReview.review;
+        QLocation location = QLocation.location;
+        QStore store = QStore.store;
+        QMember member = QMember.member;
+
+        // BooleanBuilder 정의
+        BooleanBuilder builder = new BooleanBuilder();
+
+        builder.and(member.id.eq(9001L));
+
+        // BooleanBuilder 사용
+        if (storeName != null && !storeName.isBlank()) {
+            builder.and(store.name.contains(storeName));
+        }
+
+        // 3) 별점대 필터 (5/4/3/2/1)
+        if (star != null) {
+            applyStar(builder, review, star);
+        }
+
+
+        // Repository 사용 & 결과 매핑
+        List<Review> reviewList = reviewRepository.mysearchReview(builder);
+
+        // 리턴
+        return reviewList;
+    }
+    private void applyStar(BooleanBuilder where, QReview r, Integer bucket) {
+        switch (bucket) {
+            case 5 -> where.and(r.star.goe(5.0f)); // 딱 5.0만 보려면 eq(5.0f)로 변경
+            case 4 -> where.and(r.star.goe(4.0f).and(r.star.lt(5.0f)));
+            case 3 -> where.and(r.star.goe(3.0f).and(r.star.lt(4.0f)));
+            case 2 -> where.and(r.star.goe(2.0f).and(r.star.lt(3.0f)));
+            case 1 -> where.and(r.star.goe(1.0f).and(r.star.lt(2.0f)));
+            case 0 -> where.and(r.star.lt(1.0f));
+            default -> { /* 적용 안 함 */ }
+        }
     }
 
 //    @Override

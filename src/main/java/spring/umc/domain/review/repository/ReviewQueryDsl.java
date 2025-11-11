@@ -9,4 +9,7 @@ public interface ReviewQueryDsl {
     List<Review> searchReview(
             Predicate predicate
     );
+    List<Review> mysearchReview(
+            Predicate predicate
+    );
 }

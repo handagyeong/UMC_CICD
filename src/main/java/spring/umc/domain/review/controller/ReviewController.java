@@ -23,4 +23,12 @@ public class ReviewController {
         List<Review> result = reviewQueryService.searchReview(query, type);
         return result;
     }
+    @GetMapping("/myreviews/search")
+    public List<Review> mysearchReview(
+            @RequestParam(name = "storename", required = false) String storeName,
+            @RequestParam(name = "star", required = false) Integer star
+    ) {
+        List<Review> result = reviewQueryService.mysearchReview(storeName, star);
+        return result;
+    }
 }
