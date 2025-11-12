@@ -1,11 +1,12 @@
 package spring.umc.domain.review.service;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import spring.umc.domain.member.entity.QMember;
+import spring.umc.domain.review.converter.ReviewConverter;
+import spring.umc.domain.review.dto.ReviewResDTO;
 import spring.umc.domain.review.entity.QReview;
 import spring.umc.domain.review.entity.Review;
 import spring.umc.domain.review.repository.ReviewRepository;
@@ -16,11 +17,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ReviewQueryService {
 
     private final ReviewRepository reviewRepository;
 
-    public List<Review> searchReview(String query, String type) {
+    public List<ReviewResDTO.Summary> searchReview(String query, String type) {
 
         // Q클래스 정의
         QReview review = QReview.review;
@@ -53,9 +55,9 @@ public class ReviewQueryService {
         List<Review> reviewList = reviewRepository.searchReview(builder);
 
         // 리턴
-        return reviewList;
+        return ReviewConverter.toSummaryList(reviewList);
     }
-    public List<Review> mysearchReview(String storeName, Integer star) {
+    public List<ReviewResDTO.Summary> mysearchReview(String storeName, Integer star) {
 
         // Q클래스 정의
         QReview review = QReview.review;
@@ -83,7 +85,7 @@ public class ReviewQueryService {
         List<Review> reviewList = reviewRepository.mysearchReview(builder);
 
         // 리턴
-        return reviewList;
+        return ReviewConverter.toSummaryList(reviewList);
     }
     private void applyStar(BooleanBuilder where, QReview r, Integer bucket) {
         switch (bucket) {
