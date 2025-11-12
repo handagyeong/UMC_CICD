@@ -1,13 +1,12 @@
-package spring.umc.domain.review.exception.code; // <- 리뷰 도메인 패키지에!
-
+package spring.umc.domain.review.exception.code;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import spring.umc.global.apiPayload.code.BaseErrorCode; // <- ★★★
+import spring.umc.global.apiPayload.code.BaseErrorCode;
 
 @Getter
 @AllArgsConstructor
-public enum ReviewErrorCode implements BaseErrorCode { // <- ★★★ BaseErrorCode 구현!
+public enum ReviewErrorCode implements BaseErrorCode {
 
 
     REVIEW_SEARCH_TYPE_INVALID(HttpStatus.BAD_REQUEST, "REVIEW4001", "유효하지 않은 검색 타입입니다. ('location', 'star', 'both'만 가능)"),
