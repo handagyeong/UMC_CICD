@@ -19,7 +19,7 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long> 
             "JOIN m.store s " +
             "WHERE um.member.id = :userId AND um.isFinished = :isFinished")
     Page<MissionHistoryDto> findMyMission(
-            @Param("userId") Long userId, // 2. String -> Long 수정!
+            @Param("userId") Long userId,
             @Param("isFinished") boolean isFinished,
             Pageable pageable
     );
@@ -27,5 +27,5 @@ public interface UserMissionRepository extends JpaRepository<UserMission, Long> 
     //홈화면 달성미션개수 가져오는 쿼리
     @Query("SELECT COUNT(um) "+ "FROM UserMission um "+
             "WHERE um.member.id = :userId AND um.isFinished = true")
-    long countFinishedMission(@Param("userId") Long userId); // 2. String -> Long 수정!
+    Long countFinishedMission(@Param("userId") Long userId); //5주차 피드백수정2
 }

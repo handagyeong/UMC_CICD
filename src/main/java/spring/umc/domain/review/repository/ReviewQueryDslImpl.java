@@ -10,7 +10,7 @@ import com.querydsl.core.types.Predicate;
 import java.util.List;
 
 
-@Repository //흠..예시랑다른뎅..
+@Repository
 @RequiredArgsConstructor
 public class ReviewQueryDslImpl implements ReviewQueryDsl{
 
@@ -27,6 +27,7 @@ public class ReviewQueryDslImpl implements ReviewQueryDsl{
 
         return queryFactory
                 .selectFrom(review)
+                .join(review.member).fetchJoin()
                 .where(predicate)
                 .fetch();
     }
@@ -42,6 +43,7 @@ public class ReviewQueryDslImpl implements ReviewQueryDsl{
 
         return queryFactory
                 .selectFrom(review)
+                .join(review.member).fetchJoin()
                 .where(predicate)
                 .fetch();
     }

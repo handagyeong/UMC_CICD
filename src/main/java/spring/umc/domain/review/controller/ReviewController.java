@@ -1,17 +1,16 @@
 package spring.umc.domain.review.controller;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import spring.umc.domain.review.entity.Review;
 import spring.umc.domain.review.service.ReviewQueryService;
-
-
 import spring.umc.domain.review.converter.ReviewConverter;
 import spring.umc.domain.review.dto.ReviewResponseDTO;
 
+import spring.umc.global.apiPayload.ApiResponse; // <- 1. ApiResponse 임포트
+import spring.umc.global.apiPayload.code.GeneralSuccessCode; // <- 2. SuccessCode 임포트
 
 import java.util.List;
 
@@ -23,19 +22,21 @@ public class ReviewController {
     private final ReviewConverter reviewConverter;
 
     @GetMapping("/reviews/search")
-    public List<ReviewResponseDTO.ReviewDto> searchReview(
+
+    public ApiResponse<List<ReviewResponseDTO.ReviewDto>> searchReview(
             @RequestParam String type,
             @RequestParam String query
     ){
         List<Review> reviewList = reviewQueryService.searchReview(type, query);
-
         List<ReviewResponseDTO.ReviewDto> dtoList = reviewConverter.toReviewDtoList(reviewList);
 
-        return dtoList;
+
+        return ApiResponse.onSuccess(GeneralSuccessCode.OK, dtoList);
     }
 
     @GetMapping("/reviews/my")
-    public List<ReviewResponseDTO.ReviewDto> searchMyReview(
+
+    public ApiResponse<List<ReviewResponseDTO.ReviewDto>> searchMyReview(
             @RequestParam Long memberId,
             @RequestParam(required = false) String type,
             @RequestParam(required = false) String query
@@ -44,6 +45,6 @@ public class ReviewController {
         List<ReviewResponseDTO.ReviewDto> dtoList = reviewConverter.toReviewDtoList(reviewList);
 
 
-        return dtoList;
+        return ApiResponse.onSuccess(GeneralSuccessCode.OK, dtoList);
     }
 }
