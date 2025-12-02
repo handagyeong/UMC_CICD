@@ -1,0 +1,27 @@
+package spring.umc.domain.member.entity;
+
+
+import spring.umc.global.BaseEntity;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+public class Terms extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(columnDefinition = "TEXT")
+    private String content;
+
+    @OneToMany(mappedBy = "terms", cascade = CascadeType.REMOVE)
+    private List<UserTerms> userTermsList = new ArrayList<>();
+}
