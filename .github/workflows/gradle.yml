@@ -36,6 +36,7 @@ jobs:
     - name: make application.yml
       if : contains(github.ref,'main')
       run : | 
+        mkdir -p ./src/main/resources
         cd ./src/main/resources
         touch ./application.yml
         echo "${{secrets.YML_DEV}}" > ./application.yml
